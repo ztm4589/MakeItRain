@@ -28,9 +28,9 @@ namespace MakeItRain
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "728589213827172",
+               appSecret: "c9c49f60ec40736a0ff508732d8dbb6e");
 
             //app.UseGoogleAuthentication();
         }
