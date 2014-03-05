@@ -40,3 +40,24 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+
+.left-pannel {
+    float:left;
+    display:block;
+}
+.main-facebook-feed {
+    margin: 10% 10% 10%;
+    float:left;
+    display:block;
+}
+
+.main-left-pannel {
+    float:right;
+    display:block;
+}
+
+footer {
+    clear: both;
+    margin: 33%;
+}
