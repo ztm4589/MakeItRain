@@ -35,12 +35,13 @@ namespace MakeItRain.Controllers
         {
             ViewBag.Message = "Your application description page.";
             var fb = new FacebookClient();
-            dynamic result = fb.Get("oauth/access_token", new
+            dynamic result = fb.Get("dialog/oauth", new
             {
                 client_id = "728589213827172",
                 client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
-                grant_type = "client_credentials"
+                redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/"
             });
+
 
             //Session["FacebookID"] = result;
 
