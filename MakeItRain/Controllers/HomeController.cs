@@ -43,7 +43,11 @@ namespace MakeItRain.Controllers
                     grant_type = "client_credentials",
                     redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
                 });
-                Session["FacebookID"] = result.access_token;
+
+                fb = new FacebookClient(result.access_token);
+                result = fb.Get("me?fields=id");
+                var id = result.id;
+                Session["FacebookID"] = id ;
             }
             catch(Exception e)
             {
