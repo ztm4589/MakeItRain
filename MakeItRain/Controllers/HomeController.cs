@@ -9,7 +9,6 @@ using Facebook;
 
 namespace MakeItRain.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
 
