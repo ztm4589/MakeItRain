@@ -21,7 +21,7 @@
                         $.ajax({
                             type: "POST",
                             url: postUrl,
-                            data: {"id": response.id, "name": response.name},
+                            data: { "facebookId": response.id, "facebookName": response.name },
                         }).done(function () {
                             console.log("Were done!");
                         });
