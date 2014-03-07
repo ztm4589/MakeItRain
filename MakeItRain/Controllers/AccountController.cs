@@ -73,7 +73,7 @@ namespace MakeItRain.Controllers
 
             Session["FacebookID"] = id;
             Session["FacebookName"] = facebookName;   //TODO We need to make this real
-            return Redirect("/");
+            return new HttpStatusCodeResult(200);
         }
 
         public ActionResult Facebook()
