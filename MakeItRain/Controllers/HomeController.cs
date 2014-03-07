@@ -43,13 +43,13 @@ namespace MakeItRain.Controllers
                     grant_type = "client_credentials",
                     redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
                 });
+                Session["FacebookID"] = result;
             }
             catch(Exception e)
             {
                return new HttpStatusCodeResult(500, e.Message); 
             }
 
-            //Session["FacebookID"] = result;
 
             return View();
         }
@@ -58,7 +58,7 @@ namespace MakeItRain.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return new HttpStatusCodeResult(500, Session["FacebookID"].ToString());
         }
     }
 }
