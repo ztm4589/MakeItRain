@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using MakeItRain.Models;
+using Facebook;
 
 namespace MakeItRain.Controllers
 {
@@ -59,6 +60,32 @@ namespace MakeItRain.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
+
+        public ActionResult Facebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = "728589213827172",
+                client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
+                redirect_uri = RedirectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email" // Add other permissions as needed
+            });
+
+            return Redirect(loginUrl.AbsoluteUri);
         }
 
         //

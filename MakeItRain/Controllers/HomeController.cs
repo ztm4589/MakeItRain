@@ -9,8 +9,14 @@ using Facebook;
 
 namespace MakeItRain.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+
+        public ActionResult Login()
+        {
+            return View();
+        }
         
         public ActionResult Index()
         {
@@ -44,6 +50,7 @@ namespace MakeItRain.Controllers
                     redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
                 });
 
+                Session["FacebookAccessToken"] = result.access_token;
                 fb.AccessToken = result.access_token;
                 result = fb.Get("me?fields=id");
                 var id = result.id;
@@ -64,5 +71,6 @@ namespace MakeItRain.Controllers
 
             return new HttpStatusCodeResult(500, Session["FacebookID"].ToString());
         }
+
     }
 }
