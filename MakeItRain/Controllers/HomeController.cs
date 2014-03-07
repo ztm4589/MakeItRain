@@ -13,7 +13,7 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
-            HttpCookie facebookCookie = new HttpCookie("c_user");
+            HttpCookie facebookCookie = new HttpCookie("http://vm344b.se.rit.edu/");
             facebookCookie = Request.Cookies["c_user"];
 
 
