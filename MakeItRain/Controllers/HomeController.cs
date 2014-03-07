@@ -14,6 +14,7 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
+            /*
             var fb = new FacebookClient();
             dynamic result = fb.Get("oauth/access_token", new
             {
@@ -26,12 +27,22 @@ namespace MakeItRain.Controllers
             {
                 return Redirect("./account/login");
             }
+             * */
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            var fb = new FacebookClient();
+            dynamic result = fb.Get("oauth/access_token", new
+            {
+                client_id = "728589213827172",
+                client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
+                grant_type = "client_credentials"
+            });
+
+            Session["FacebookID"] = result;
 
             return View();
         }

@@ -177,9 +177,9 @@ call :CheckParameterFile
 echo. Start executing msdeploy.exe
 echo -------------------------------------------------------
 if  not exist "%_DeploySetParametersFile%" (
-set _MSDeployCommandline="%MSDeployPath%msdeploy.exe" -source:package='%RootPath%MakeItRain.zip' -dest:%_Destination% -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension
+set _MSDeployCommandline="%MSDeployPath%msdeploy.exe" -source:package='%RootPath%MakeItRain.zip' -dest:%_Destination% -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -skip:objectname='dirPath',absolutepath='obj\\Debug\\Package\\PackageTmp\\App_Data$' -skip:objectname='dirPath',absolutepath='Default\ Web\ Site/MakeItRain\\App_Data$'
 ) else (
-set _MSDeployCommandline="%MSDeployPath%msdeploy.exe" -source:package='%RootPath%MakeItRain.zip' -dest:%_Destination% -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:"%_DeploySetParametersFile%"
+set _MSDeployCommandline="%MSDeployPath%msdeploy.exe" -source:package='%RootPath%MakeItRain.zip' -dest:%_Destination% -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -skip:objectname='dirPath',absolutepath='obj\\Debug\\Package\\PackageTmp\\App_Data$' -skip:objectname='dirPath',absolutepath='Default\ Web\ Site/MakeItRain\\App_Data$' -setParamFile:"%_DeploySetParametersFile%"
 )
 
 if "%_HaveArgMSDeployAdditonalFlags%" == "" (
