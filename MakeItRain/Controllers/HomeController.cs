@@ -13,10 +13,11 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
-            var client = new Facebook.FacebookClient();
+            HttpCookie facebookCookie = new HttpCookie("c_user");
+            facebookCookie = Request.Cookies["c_user"];
 
 
-            if (client == null)  //This needs to check if the user is "logged in"
+            if (facebookCookie == null) 
             {
                 return Redirect("./account/login");
             }
