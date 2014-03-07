@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
+using Facebook;
 
 namespace MakeItRain.Controllers
 {
@@ -13,11 +14,15 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
-            HttpCookie facebookCookie = new HttpCookie("http://vm344b.se.rit.edu/");
-            facebookCookie = Request.Cookies["c_user"];
+            var fb = new FacebookClient();
+            dynamic result = fb.Get("oauth/access_token", new
+            {
+                client_id = "728589213827172",
+                client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
+                grant_type = "client_credentials"
+            });
 
-
-            if (facebookCookie == null) 
+            if (result.client_id != null) 
             {
                 return Redirect("./account/login");
             }
