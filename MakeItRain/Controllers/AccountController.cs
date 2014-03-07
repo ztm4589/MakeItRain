@@ -13,7 +13,7 @@ using Facebook;
 
 namespace MakeItRain.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class AccountController : Controller
     {
         public AccountController()
@@ -71,6 +71,19 @@ namespace MakeItRain.Controllers
                 uriBuilder.Path = Url.Action("FacebookCallback");
                 return uriBuilder.Uri;
             }
+        }
+
+        public ActionResult FacebookCallback()
+        {
+            var id = Request.Params.Get("facebookId");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(500, "Invalid request, require Facebook ID");
+            }
+
+            Session["FacebookID"] = id;
+            Session["FacebookName"] = "TempName";   //TODO We need to make this real
+            return Redirect("/");
         }
 
         public ActionResult Facebook()

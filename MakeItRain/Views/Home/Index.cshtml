@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Make it Rain";
+    
 }
 <div class="col left-pannel">
     <div class="row-md-4">
@@ -8,7 +9,7 @@
     </div>
     <hr />
     <div class="row-md-4">
-        <p>Welcome, <b>User's Name</b></p>
+        <p>Welcome, <b>@HttpContext.Current.Session["FacebookName"].ToString();</b></p>
     </div>
     <hr />
     <div class="row-md-4">
