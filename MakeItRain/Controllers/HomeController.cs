@@ -68,7 +68,7 @@ namespace MakeItRain.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return new HttpStatusCodeResult(500, Session["FacebookID"].ToString());
+            return new HttpStatusCodeResult(500, Session["FacebookAccessToken"].ToString());
         }
 
     }
