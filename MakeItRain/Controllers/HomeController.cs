@@ -44,7 +44,7 @@ namespace MakeItRain.Controllers
                     redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
                 });
 
-                fb = new FacebookClient(result.access_token);
+                fb.AccessToken = result.access_token;
                 result = fb.Get("me?fields=id");
                 var id = result.id;
                 Session["FacebookID"] = id ;
