@@ -42,7 +42,7 @@ namespace MakeItRain.Controllers
                 grant_type = "client_credentials"
             });
 
-            Session["FacebookID"] = result;
+            //Session["FacebookID"] = result;
 
             return View();
         }
