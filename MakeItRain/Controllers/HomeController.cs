@@ -22,7 +22,7 @@ namespace MakeItRain.Controllers
                 grant_type = "client_credentials"
             });
 
-            if (result.client_id != null) 
+            if (result == null || result.client_id != null) 
             {
                 return Redirect("./account/login");
             }
