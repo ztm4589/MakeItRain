@@ -91,6 +91,11 @@ namespace MakeItRain.Controllers
             Session["FacebookAccessToken"] = result.access_token;
             fb.AccessToken = result.access_token;
 
+            result = fb.Get("me?fields=id");
+            var id = result.id;
+
+            Session["FacebookID"] = id;
+
             /*
 
             var id = Request.Params.Get("facebookId");
