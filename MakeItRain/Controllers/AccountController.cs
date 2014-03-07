@@ -61,18 +61,7 @@ namespace MakeItRain.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        private Uri RedirectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallback");
-                return uriBuilder.Uri;
-            }
-        }
-
+     
         public ActionResult FacebookCallback()
         {
             var id = Request.Params.Get("facebookId");
