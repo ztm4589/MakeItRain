@@ -23,11 +23,11 @@ namespace MakeItRain.Controllers
                 grant_type = "client_credentials"
             });
 
-            if (result == null || result.client_id != null) 
+             * */
+            if ( Session["FacebookID"] == null) 
             {
                 return Redirect("./account/login");
             }
-             * */
             return View();
         }
 
@@ -43,7 +43,7 @@ namespace MakeItRain.Controllers
                     grant_type = "client_credentials",
                     redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
                 });
-                Session["FacebookID"] = result;
+                Session["FacebookID"] = result.access_token;
             }
             catch(Exception e)
             {
