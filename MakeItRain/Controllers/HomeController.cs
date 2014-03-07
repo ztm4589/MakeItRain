@@ -46,7 +46,7 @@ namespace MakeItRain.Controllers
             }
             catch(Exception e)
             {
-                return Redirect("./account/login"); 
+               return new HttpStatusCodeResult(500, e.Message); 
             }
 
             //Session["FacebookID"] = result;
