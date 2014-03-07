@@ -75,58 +75,21 @@ namespace MakeItRain.Controllers
 
         public ActionResult FacebookCallback()
         {
-
-            var code = Request.Params.Get("code");
-
-            var fb = new FacebookClient();
-            dynamic result = fb.Get("oauth/access_token", new
-            {
-                client_id = "728589213827172",
-                client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
-                grant_type = "client_credentials",
-                redirect_uri = "http://vm344b.se.rit.edu/MakeItRain/",
-                code=code
-            });
-
-            Session["FacebookAccessToken"] = result.access_token;
-            fb.AccessToken = result.access_token;
-            try
-            {
-                result = fb.Get("me?fields=id");
-                Session["FacebookID"] = result.id;
-            }
-            catch (Exception e)
-            {
-                return new HttpStatusCodeResult(500, e.Message);
-            }
-
-            /*
-
             var id = Request.Params.Get("facebookId");
-            if (id == null)
+            var facebookName = Request.Params.Get("facebookName");
+            if (id == null || facebookName == null)
             {
-                return new HttpStatusCodeResult(500, "Invalid request, require Facebook ID");
+                return new HttpStatusCodeResult(500, "Invalid request");
             }
 
             Session["FacebookID"] = id;
-            Session["FacebookName"] = "TempName";   //TODO We need to make this real
-              **/
+            Session["FacebookName"] = facebookName;   //TODO We need to make this real
             return Redirect("/");
         }
 
         public ActionResult Facebook()
         {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
-            {
-                client_id = "728589213827172",
-                client_secret = "c9c49f60ec40736a0ff508732d8dbb6e",
-                redirect_uri = RedirectUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email" // Add other permissions as needed
-            });
-
-            return Redirect(loginUrl.AbsoluteUri);
+          return View();
         }
 
         //
