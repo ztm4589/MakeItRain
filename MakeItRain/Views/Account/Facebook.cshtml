@@ -19,11 +19,11 @@
                     FB.api('/me', function (response) {
                         console.log('Good to see you, ' + response.name + '.' + response.id);
                         $.ajax({
-                            type: "POST",
+                            type: "GET",
                             url: postUrl,
                             data: { "facebookId": response.id, "facebookName": response.name },
-                        }).done(function () {
-                            console.log("Were done!");
+                        }).done(function (result) {
+                            console.log(result);
                         });
                     });
                 } else {
