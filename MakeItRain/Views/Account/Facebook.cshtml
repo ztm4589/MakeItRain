@@ -2,53 +2,60 @@
 
 <html>
 <head>
-    <script>
+    @Scripts.Render("~/bundles/jquery")
 
-        var postUrl = "http://vm344b.se.rit.edu/MakeItRain/account/FacebookCallback/";
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '728589213827172',
-                status: true,
-                xfbml: true
-            });
-
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    console.log('Welcome!  Fetching your information.... ');
-                    FB.api('/me', function (response) {
-                        console.log('Good to see you, ' + response.name + '.' + response.id);
-                        $.ajax({
-                            type: "GET",
-                            url: postUrl,
-                            data: { "facebookId": response.id, "facebookName": response.name },
-                        }).done(function (result) {
-                            console.log(result);
-                            window.location="/MakeItRain/"
-                        });
-                    });
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                }
-            });
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-
-    </script>
 
     <meta name="viewport" content="width=device-width" />
     <title>Facebook</title>
 </head>
 <body>
     <div> 
+        <button class="facebookLogin">Facebook Login</button>
     </div>
 </body>
+<script>
+
+    var postUrl = "http://vm344b.se.rit.edu/MakeItRain/account/FacebookCallback/";
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '728589213827172',
+            status: true,
+            xfbml: true
+        });
+
+
+    };
+    $(".facebookLogin").on("click", function () {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function (response) {
+                    console.log('Good to see you, ' + response.name + '.' + response.id);
+                    $.ajax({
+                        type: "GET",
+                        url: postUrl,
+                        data: { "facebookId": response.id, "facebookName": response.name },
+                    }).done(function (result) {
+                        console.log(result);
+                        window.location = "/MakeItRain/"
+                    });
+                });
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        });
+    });
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+</script>
+
 </html>
