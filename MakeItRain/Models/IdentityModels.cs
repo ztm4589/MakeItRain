@@ -26,7 +26,7 @@ namespace MakeItRain.Models
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<ChatLog> ChatLogs { get; set; }
-        public DbSet<UserLogger> UserLogger { get; set; }
+        //public DbSet<UserLogger> UserLogger { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

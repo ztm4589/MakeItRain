@@ -95,19 +95,6 @@ namespace MakeItRain.Migrations
                 .Index(t => t.ApplicationUserID);
             
             CreateTable(
-                "dbo.UserLogger",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicationUserID = c.String(maxLength: 128),
-                        Login = c.DateTime(nullable: false),
-                        Logout = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserID)
-                .Index(t => t.ApplicationUserID);
-            
-            CreateTable(
                 "dbo.StockTransaction",
                 c => new
                     {
@@ -128,15 +115,12 @@ namespace MakeItRain.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.StockTransaction", "ApplicationUserID", "dbo.AspNetUsers");
-            DropForeignKey("dbo.UserLogger", "ApplicationUserID", "dbo.AspNetUsers");
             DropForeignKey("dbo.ChatLog", "ApplicationUserID", "dbo.AspNetUsers");
             DropForeignKey("dbo.CalendarEvent", "ApplicationUserID", "dbo.AspNetUsers");
             DropIndex("dbo.StockTransaction", new[] { "ApplicationUserID" });
-            DropIndex("dbo.UserLogger", new[] { "ApplicationUserID" });
             DropIndex("dbo.ChatLog", new[] { "ApplicationUserID" });
             DropIndex("dbo.CalendarEvent", new[] { "ApplicationUserID" });
             DropTable("dbo.StockTransaction");
-            DropTable("dbo.UserLogger");
             DropTable("dbo.ChatLog");
             DropTable("dbo.CalendarEvent");
             DropForeignKey("dbo.AspNetUserClaims", "User_Id", "dbo.AspNetUsers");
