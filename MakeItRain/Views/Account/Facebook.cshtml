@@ -30,12 +30,13 @@
         FB.login(function (response) {
             if (response.authResponse) {
                 console.log('Welcome!  Fetching your information.... ');
+                var accessToken = response.authResponse.accessToken;
                 FB.api('/me', function (response) {
                     console.log('Good to see you, ' + response.name + '.' + response.id);
                     $.ajax({
                         type: "GET",
                         url: postUrl,
-                        data: { "facebookId": response.id, "facebookName": response.name },
+                        data: { "facebookId": response.id, "facebookName": response.name, "accessToken": accessToken },
                     }).done(function (result) {
                         console.log(result);
                         window.location = "/MakeItRain/"
@@ -44,7 +45,7 @@
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
-        });
+        }, { scope: "user_about_me,friends_about_me,read_stream" });
     });
 
     (function (d, s, id) {

@@ -66,12 +66,14 @@ namespace MakeItRain.Controllers
         {
             var id = Request.Params.Get("facebookId");
             var facebookName = Request.Params.Get("facebookName");
-            if (id == null || facebookName == null)
+            var accessToken = Request.Params.Get("accessToken");
+            if (id == null || facebookName == null || accessToken == null)
             {
                 return new HttpStatusCodeResult(500, "Invalid request");
             }
 
             Session["FacebookID"] = id;
+            Session["accessToken"] = accessToken;
             Session["FacebookName"] = facebookName;   //TODO We need to make this real
             return new HttpStatusCodeResult(200);
         }

@@ -9,7 +9,8 @@
     </div>
     <hr />
     <div class="row-md-4">
-        <p>Welcome, <b>@HttpContext.Current.Session["FacebookName"].ToString();</b></p>
+        <p>Welcome, <b>@HttpContext.Current.Session["FacebookName"].ToString()</b></p>
+        
     </div>
     <hr />
     <div class="row-md-4">
@@ -17,13 +18,13 @@
     </div>
     <hr />
     <div class="row-md-4 pannel-friends"  >
-        Friends go here, if you have them
+        @Html.Raw(HttpContext.Current.Session["friends"])
     </div>
     
 </div>
 
 <div class="main-facebook-feed">
-    Facebook Feed here
+    @Html.Raw(HttpContext.Current.Session["feed"])
 </div>
 
 <div class="main-left-pannel col">

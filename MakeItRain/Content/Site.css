@@ -61,3 +61,6 @@ footer {
     clear: both;
     margin: 33%;
 }
+ul {
+    list-style-type:none;
+}
