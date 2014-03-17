@@ -19,6 +19,16 @@
     <hr />
     <div class="row-md-4 pannel-friends"  >
         @Html.Raw(HttpContext.Current.Session["friends"])
+        <script>
+            function addFriend() {
+                var friend_id = document.getElementById('facebook_friend_id');
+                location.href = "www.facebook.com/dialog/friends/?id="+friend_id+"&app_id=728589213827172&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/";
+            }
+        </script>
+        <form>
+            <input type="text" id="facebook_friend_id" name="facebook_friend_id" />
+            <button onclick="addFriend()">Add Friend</button>
+        </form>
     </div>
     
 </div>
