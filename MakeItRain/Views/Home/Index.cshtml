@@ -21,20 +21,25 @@
         @Html.Raw(HttpContext.Current.Session["friends"])
         <script>
             function addFriend() {
-                var friend_id = document.getElementById('facebook_friend_id');
-                location.href = "www.facebook.com/dialog/friends/?id="+friend_id+"&app_id=728589213827172&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/";
+                var friend_id = document.getElementById('facebook_friend_id').value;
+                console.log("Friend ID"+friend_id);
+                window.location.assign("http://www.facebook.com/dialog/friends/?id="+friend_id+"&app_id=728589213827172&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/");
             }
         </script>
-        <form>
             <input type="text" id="facebook_friend_id" name="facebook_friend_id" />
-            <button onclick="addFriend()">Add Friend</button>
-        </form>
+            <button onclick="addFriend();">Add Friend</button>
     </div>
     
 </div>
 
 <div class="main-facebook-feed">
     @Html.Raw(HttpContext.Current.Session["feed"])
+    <script>
+        function createPost() {
+            window.location.assign("https://www.facebook.com/dialog/feed?app_id=728589213827172&display=popup&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/")
+        }
+    </script>
+    <button onclick="createPost();">Make a post</button>
 </div>
 
 <div class="main-left-pannel col">
