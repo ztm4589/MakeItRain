@@ -12,7 +12,6 @@ namespace MakeItRain.Models
         public virtual ICollection<StockTransaction> StockTransactions { get; set; }
         public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
         public virtual ICollection<ChatLog> ChatLogs { get; set; }
-        public virtual ICollection<UserLogger> Logger { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -26,7 +25,6 @@ namespace MakeItRain.Models
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<ChatLog> ChatLogs { get; set; }
-        public DbSet<UserLogger> UserLogger { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

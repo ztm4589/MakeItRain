@@ -191,7 +191,6 @@
     <Compile Include="Models\ChatLog.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\StockTransaction.cs" />
-    <Compile Include="Models\UserLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
