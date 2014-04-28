@@ -6,11 +6,14 @@ using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using Facebook;
+using MakeItRain.Models;
 
 namespace MakeItRain.Controllers
 {
+    
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Login()
         {
@@ -19,6 +22,7 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
+            db.ChatLogs.Add(new ChatLog(){ID = 1, ApplicationUserID = "1", Message = "Test"});
             if ( Session["FacebookID"] == null) 
             {
                 return Redirect("./account/Facebook/");

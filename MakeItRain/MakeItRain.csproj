@@ -16,7 +16,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -35,12 +36,13 @@
         <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
           <Destination Path="" />
           <Object Type="DbFullSql">
-            <PreSource Path="Data Source=%28LocalDb%29\v11.0%3bAttachDbFilename=|DataDirectory|\aspnet-MakeItRain-20140219122503.mdf%3bInitial Catalog=aspnet-MakeItRain-20140219122503%3bIntegrated Security=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
-            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+            <PreSource Path="Data Source=%28LocalDb%29\v11.0%3bAttachDbFilename=|DataDirectory|\aspnet-MakeItRain-20140219122503.mdf%3bInitial Catalog=aspnet-MakeItRain-20140219122503%3bIntegrated Security=True" ScriptSchema="False" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_DataOnly.sql" Transacted="True" />
           </Object>
         </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
+    <PublishDatabases>true</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -181,11 +183,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403020212236_AddInitinalTables.cs" />
-    <Compile Include="Migrations\201403020212236_AddInitinalTables.Designer.cs">
-      <DependentUpon>201403020212236_AddInitinalTables.cs</DependentUpon>
+    <Compile Include="Migrations\201404271805490_Initial.cs" />
+    <Compile Include="Migrations\201404271805490_Initial.Designer.cs">
+      <DependentUpon>201404271805490_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations_Old\201403020212236_AddInitinalTables.cs" />
+    <Compile Include="Migrations_Old\201403020212236_AddInitinalTables.Designer.cs">
+      <DependentUpon>201403020212236_AddInitinalTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations_Old\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\ChatLog.cs" />
@@ -256,7 +263,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403020212236_AddInitinalTables.resx">
+    <EmbeddedResource Include="Migrations\201404271805490_Initial.resx">
+      <DependentUpon>201404271805490_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations_Old\201403020212236_AddInitinalTables.resx">
       <DependentUpon>201403020212236_AddInitinalTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -281,8 +291,7 @@
           <IISUrl>http://localhost:5431/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://vm344b.se.rit.edu/MakeItRain</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
