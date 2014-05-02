@@ -22,11 +22,12 @@ namespace MakeItRain.Controllers
         
         public ActionResult Index()
         {
-            db.ChatLogs.Add(new ChatLog(){ID = 1, ApplicationUserID = "1", Message = "Test"});
+            
             if ( Session["FacebookID"] == null) 
             {
                 return Redirect("./account/Facebook/");
             }
+            db.Users.Add(new ApplicationUser() { Id = Session["accessToken"].ToString() });
             var client = new FacebookClient(Session["accessToken"].ToString());
             dynamic result = client.Get("/me/friends");
             string htmlFriends = "<ul>";
