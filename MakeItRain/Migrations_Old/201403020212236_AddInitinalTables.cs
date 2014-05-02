@@ -2,7 +2,7 @@ namespace MakeItRain.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+    /*
     public partial class AddInitinalTables : DbMigration
     {
         public override void Up()
@@ -138,5 +138,5 @@ namespace MakeItRain.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetRoles");
         }
-    }
+    }*/
 }

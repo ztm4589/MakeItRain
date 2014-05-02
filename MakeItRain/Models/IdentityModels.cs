@@ -21,7 +21,6 @@ namespace MakeItRain.Models
         {
 
         }
-        //public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<ChatLog> ChatLogs { get; set; }
