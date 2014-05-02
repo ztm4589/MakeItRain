@@ -50,6 +50,7 @@ input[type="checkbox"].input-validation-error {
     margin: 20px;
     float:left;
     display:block;
+    max-width:590px;
 }
 
 .main-left-pannel {
