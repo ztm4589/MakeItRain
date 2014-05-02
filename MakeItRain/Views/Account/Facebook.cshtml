@@ -15,7 +15,7 @@
 </body>
 <script>
 
-    var postUrl = "http://vm344b.se.rit.edu/MakeItRain/account/FacebookCallback/";
+    var postUrl = "/MakeItRain/account/FacebookCallback/";
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -45,7 +45,7 @@
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
-        }, { scope: "user_about_me,friends_about_me,read_stream" });
+        }, { scope: "user_about_me,friends_about_me,read_stream,publish_stream" });
     });
 
     (function (d, s, id) {

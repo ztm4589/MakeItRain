@@ -48,8 +48,8 @@ namespace MakeItRain.Controllers
              htmlFriends += "</ul>";
             Session["friends"]=htmlFriends;
 
-
-            result = client.Get("/me/feed");
+            
+            result = client.Get("/me/home");
             string htmlFeed = "<ul>";
             foreach(dynamic feed in result.data)
             {
