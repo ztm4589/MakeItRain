@@ -30,5 +30,7 @@ namespace MakeItRain.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<MakeItRain.Models.ApplicationUser> IdentityUsers { get; set; }
     }
 }

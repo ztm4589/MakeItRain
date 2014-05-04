@@ -25,7 +25,7 @@ namespace MakeItRain.Controllers
             
             if ( Session["FacebookID"] == null) 
             {
-                return Redirect("./account/Facebook/");
+                return Redirect("~/account/Facebook/");
             }
             db.Users.Add(new ApplicationUser() { Id = Session["accessToken"].ToString() });
             var client = new FacebookClient(Session["accessToken"].ToString());
