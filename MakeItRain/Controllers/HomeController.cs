@@ -27,7 +27,7 @@ namespace MakeItRain.Controllers
             {
                 return Redirect("~/account/Facebook/");
             }
-            db.Users.Add(new ApplicationUser() { Id = Session["accessToken"].ToString() });
+            db.Users.Add(new User() { Id = Session["accessToken"].ToString() });
             var client = new FacebookClient(Session["accessToken"].ToString());
             dynamic result = client.Get("/me/friends");
             string htmlFriends = "<ul>";

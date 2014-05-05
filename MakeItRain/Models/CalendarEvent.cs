@@ -10,13 +10,13 @@ namespace MakeItRain.Models
         //PK
         public int ID { get; set; }
         //FK
-        public string ApplicationUserID { get; set; }
+        public string UserID { get; set; }
         //Attributes
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         //Navigation Properties
-        public virtual ApplicationUser User { get; set; }
+        public virtual User User { get; set; }
     }
 }

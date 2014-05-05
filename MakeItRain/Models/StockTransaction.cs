@@ -10,7 +10,7 @@ namespace MakeItRain.Models
         //PK
         public int ID { get; set; }
         //FK
-        public string ApplicationUserID { get; set; }
+        public string UserID { get; set; }
         //Attributes
         public DateTime Timestamp { get; set; }
         public string StockID { get; set; }
@@ -18,6 +18,6 @@ namespace MakeItRain.Models
         public int StockAmount { get; set; }
         public double StockPrice { get; set; }
         //Navigation Properties
-        public virtual ApplicationUser User { get; set; }
+        public virtual User User { get; set; }
     }
 }

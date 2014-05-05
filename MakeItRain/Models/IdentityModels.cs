@@ -6,7 +6,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 namespace MakeItRain.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public class User : IdentityUser
     {
         //Navigation Properties
         public virtual ICollection<StockTransaction> StockTransactions { get; set; }
@@ -14,7 +14,7 @@ namespace MakeItRain.Models
         public virtual ICollection<ChatLog> ChatLogs { get; set; }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -31,6 +31,6 @@ namespace MakeItRain.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<MakeItRain.Models.ApplicationUser> IdentityUsers { get; set; }
+        //public System.Data.Entity.DbSet<MakeItRain.Models.User> IdentityUsers { get; set; }
     }
 }

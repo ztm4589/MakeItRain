@@ -4,6 +4,7 @@ namespace MakeItRain.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using MakeItRain.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MakeItRain.Models.ApplicationDbContext>
     {
@@ -15,7 +16,23 @@ namespace MakeItRain.Migrations
         protected override void Seed(MakeItRain.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
+            context.Users.AddOrUpdate(
+                p => p.Id,
+                new User {Id = "asdf"});
+            context.SaveChanges();
 
+            context.CalendarEvents.AddOrUpdate(
+                p => p.ID,
+                new CalendarEvent
+                {
+                    UserID = "asdf",
+                    ID = 1,
+                    Start = new DateTime(2014, 5, 4, 13, 0, 0),
+                    End = new DateTime(2014, 5, 4, 15, 0, 0),
+                    Title = "Test Event",
+                    Description = "This is a test"
+                });
+            context.SaveChanges();
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //

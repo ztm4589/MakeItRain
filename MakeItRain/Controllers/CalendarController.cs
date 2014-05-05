@@ -13,6 +13,10 @@ using DayPilot.Web.Mvc.Events.Navigator;
 using DayPilot.Web.Mvc.Json;
 using BeforeCellRenderArgs = DayPilot.Web.Mvc.Events.Calendar.BeforeCellRenderArgs;
 using TimeRangeSelectedArgs = DayPilot.Web.Mvc.Events.Calendar.TimeRangeSelectedArgs;
+using System.Data;
+using DHTMLX.Scheduler;
+using DHTMLX.Common;
+using DHTMLX.Scheduler.Data;
 
 namespace MakeItRain.Controllers
 {
@@ -30,16 +34,17 @@ namespace MakeItRain.Controllers
             return View();
         }
 
+        
         // GET: /NavigatorBackend/
         public ActionResult NavigatorBackend()
         {
-            return new Dpn(db, Session["accessToken"].ToString()).CallBack(this);
+            return new Dpn(db, /*Session["accessToken"].ToString()*/ "asdf").CallBack(this);
         }
 
         // GET: /Backend/
         public ActionResult Backend()
         {
-            return new Dpc(db, Session["accessToken"].ToString()).CallBack(this);
+            return new Dpc(db, /*Session["accessToken"].ToString()*/ "asdf").CallBack(this);
         }
 
         public class Dpn : DayPilotNavigator
@@ -64,9 +69,9 @@ namespace MakeItRain.Controllers
                     //Events = new EventManager(Controller).Data.AsEnumerable();
                 }
 
-                DataStartField = "start";
-                DataEndField = "end";
-                DataIdField = "id";
+                DataStartField = "Start";
+                DataEndField = "End";
+                DataIdField = "ID";
 
             }
         }
@@ -84,16 +89,35 @@ namespace MakeItRain.Controllers
             protected override void OnInit(InitArgs e)
             {
                 //base.OnInit(e);
-                Events = db.Users.Find(userID).CalendarEvents.AsEnumerable();
+                DataTable dt = new DataTable();
+                var tmp = db.Users.Find(userID).CalendarEvents; // db.Users.Find(userID).CalendarEvents.AsEnumerable();
+                List<CalendarEvent> list = tmp.ToList();
+
+                dt.Columns.Add("ID", typeof(int));
+                dt.Columns.Add("Start", typeof(DateTime));
+                dt.Columns.Add("End", typeof(DateTime));
+                dt.Columns.Add("Text", typeof(string));
+
+                foreach(CalendarEvent ev in list)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["ID"] = ev.ID;
+                    dr["Start"] = ev.Start;
+                    dr["End"] = ev.End;
+                    dr["Text"] = ev.Title;
+                    dt.Rows.Add(dr);
+                }
 
                 DataStartField = "Start";
                 DataEndField = "End";
                 DataIdField = "ID";
                 DataTextField = "Title";
+
+                Events = dt.AsEnumerable();
             }
 
             
 
-        }
+        }*/
     }
 }
