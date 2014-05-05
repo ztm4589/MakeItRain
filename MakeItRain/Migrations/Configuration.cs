@@ -33,6 +33,19 @@ namespace MakeItRain.Migrations
                     Description = "This is a test"
                 });
             context.SaveChanges();
+
+            context.StockTransactions.AddOrUpdate(
+                p => p.ID,
+                new StockTransaction
+                {
+                    UserID = "asdf",
+                    ID = 1,
+                    StockID = "GOOG",
+                    StockName = "Google",
+                    StockAmount = 100,
+                    StockPrice = 25.65,
+                    Timestamp = new DateTime(2014,5,5,12,25,0,0)
+                });
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
