@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <setParameter name="IIS Web Application Name" value="Default Web Site/MakeItRain" />
-  <setParameter name="DefaultConnection-Web.config Connection String" value="Data Source=localhost;Initial Catalog=MakeItRain;Persist Security Info=True;User ID=MakeItRainUser;Password=FuckTh1sShit!;Asynchronous Processing=False;Network Library=dbmssocn" />
+  <setParameter name="IIS Web Application Name" value="Default Web Site/MakeItRainDev" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="Data Source=vm344b.se.rit.edu;Initial Catalog=MakeItRain;User ID=MakeItRainUser;Password=&quot;iDon'tC@r3&quot;;Asynchronous Processing=False;Network Library=dbmssocn" />
+  <setParameter name="DefaultConnection_DatabasePublish-Web.config Connection String" value="Data Source=vm344b.se.rit.edu;Initial Catalog=MakeItRain;User ID=MakeItRainUser;Password=&quot;iDon'tC@r3&quot;;Asynchronous Processing=False;Network Library=dbmssocn" />
 </parameters>
