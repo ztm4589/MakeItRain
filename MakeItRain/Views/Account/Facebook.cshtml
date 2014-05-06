@@ -19,9 +19,10 @@
 
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '728589213827172',
+            appId: '728589213827172',//'768722593167830',
             status: true,
-            xfbml: true
+            xfbml: true,
+            version: 'v1.0'
         });
 
 
@@ -45,7 +46,7 @@
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
-        }, { scope: "user_about_me,friends_about_me,read_stream,publish_stream" });
+        }, { scope: "user_about_me,friends_about_me,user_friends,read_stream,publish_stream" });
     });
 
     (function (d, s, id) {
