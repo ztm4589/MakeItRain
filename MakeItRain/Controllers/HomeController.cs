@@ -27,9 +27,15 @@ namespace MakeItRain.Controllers
             {
                 return Redirect("~/account/Facebook/");
             }
-            db.Users.Add(new User { Id = Session["FacebookID"].ToString() });
+            
             var client = new FacebookClient(Session["accessToken"].ToString());
-            dynamic result = client.Get("/me/friends");
+            //dynamic result = (IDictionary<string, object>)client.Get("/me?fields=id");
+            //String facebookId = (string)result["id"];
+            
+            // Causes InvalidOperationException
+            //db.Users.Add(new User { Id = facebookId });
+            
+            dynamic result = client.Get("/v1.0/me/friends/", new {limit=10});
             string htmlFriends = "<ul>";
             int count = 0;
              foreach (dynamic friend in result.data  )
@@ -67,6 +73,7 @@ namespace MakeItRain.Controllers
                 htmlFeed += "</li>";
             }
             htmlFeed+="</ul>";
+            htmlFeed += "<script>var pagingLink='"+result.paging.next+"'</script>";
             Session["feed"] = htmlFeed;
             return View();
         }

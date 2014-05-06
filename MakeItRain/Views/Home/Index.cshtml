@@ -18,28 +18,128 @@
     </div>
     <hr />
     <div class="row-md-4 pannel-friends"  >
-        @Html.Raw(HttpContext.Current.Session["friends"])
+        <div id="friend_list">
+            <h3>Friends List:</h3>
+            @Html.Raw(HttpContext.Current.Session["friends"])
+        </div>
         <script>
-            function addFriend() {
-                var friend_id = document.getElementById('facebook_friend_id').value;
-                console.log("Friend ID"+friend_id);
-                window.location.assign("http://www.facebook.com/dialog/friends/?id="+friend_id+"&app_id=728589213827172&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/");
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '728589213827172',//'768722593167830',
+                    xfbml: true,
+                    version: 'v1.0'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <style>
+            .search_div {
+                height: 50px;
+                border: solid 1px black;
+                width: 200px;
+            }
+
+            .search_name {
+                float: left;
+                width: 135px;
+            }
+        </style>
+        <script>
+
+            function updateList(input) {
+
+                var currentText = $(input).val() // get the current value of the input field.
+                //console.log(currentText);
+                var limit = 15;
+                FB.api('/search?q='+currentText+'&type=user&access_token='+'@HttpContext.Current.Session["accessToken"].ToString()'+'&limit='+limit, function (response) {
+                    var i = 0;
+                    var list = document.getElementById("search_list");
+                    list.innerHTML = "";
+                    var data = response.data;
+                    if (currentText != $(input).val()) {
+                        console.log("Canceled Request");
+                        return;
+                    }
+
+                    for(i=0;i<data.length;i++){
+                        list.innerHTML += "<button onClick='addFriend(this.id);' class='search_div' id=" + data[i].id + "><p class='search_name'>" + data[i].name + "</p><img style='float:right' src='https://graph.facebook.com/" + data[i].id + "/picture' /></button>";
+                        if (i > limit) { // There in case more is returned from Facebook.
+                            break;
+                        }
+                    }
+                });
+            };
+            function addFriend(friend_id) {
+                //var friend_id = document.getElementById('facebook_friend_id').value;
+                console.log("Friend ID" + friend_id);
+                window.location.assign("http://www.facebook.com/dialog/friends/?id=" + friend_id + "&app_id=728589213827172&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/");
             }
         </script>
-            <input type="text" id="facebook_friend_id" name="facebook_friend_id" />
-            <button onclick="addFriend();">Add Friend</button>
+        <h3>Add A Friend:</h3>
+        <label>Search:</label><input type="text" oninput="updateList(this);" id="facebook_friend_id" name="facebook_friend_id" />
+        <div id="search_list" style="width:200px;">
+        </div>
+        <p>Click a user to add them.</p>
+        <div id="facebook_send_message">
+            <script>
+                function sendFBMessage() {
+                    FB.ui({
+                        method: 'send',
+                        link: 'http://vm344b.se.rit.edu/MakeItRain/'
+                    });
+                }
+            </script>
+            <button onclick="sendFBMessage();">Send Message</button>
+        </div>
     </div>
     
 </div>
 
 <div class="main-facebook-feed">
-    @Html.Raw(HttpContext.Current.Session["feed"])
+    <div id="facebook_feed">
+        @Html.Raw(HttpContext.Current.Session["feed"])
+    </div>
     <script>
         function createPost() {
             window.location.assign("https://www.facebook.com/dialog/feed?app_id=728589213827172&display=popup&redirect_uri=http://vm344b.se.rit.edu/MakeItRain/")
         }
+        function loadMore() {
+            var indexOfAnd = pagingLink.indexOf("&");
+            var untilText = pagingLink.substring(indexOfAnd);
+            console.log("INDEX" + indexOfAnd + " text:" + untilText);
+            
+            FB.api('/me/home?access_token=' + '@HttpContext.Current.Session["accessToken"].ToString()'+untilText, function (response) {
+                var htmlFeed = "<ul>";
+                var i = 0;
+                console.log(response);
+                var data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    var feed = data[i];
+                    htmlFeed += "<li>";
+                    if (feed.message != null && feed.message != "") {
+                        htmlFeed += "<div class='statusMessage' id='" + feed.id + "'>" + feed.message + "</div>";
+                    }
+                    else {
+                        htmlFeed += "<div class='statusMessage' id='" + feed.id + "'>" + feed.story + "</div>";
+                    }
+
+                    htmlFeed += "</li>";
+                }
+                htmlFeed += "</ul>";
+                pagingLink = response.paging.next;
+                $("#facebook_feed").append(htmlFeed);
+            });
+        }   
     </script>
-    <button onclick="createPost();">Make a post</button>
+    <button onclick='loadMore();'>Load More</button>
+        <button onclick="createPost();">Make a post</button>
 </div>
 
 
