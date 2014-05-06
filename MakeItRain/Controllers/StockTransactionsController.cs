@@ -39,7 +39,7 @@ namespace MakeItRain.Controllers
         // GET: StockTransactions/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.IdentityUsers, "Id", "UserName");
+            ViewBag.UserID = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace MakeItRain.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.IdentityUsers, "Id", "UserName", stockTransaction.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "UserName", stockTransaction.UserID);
             return View(stockTransaction);
         }
 
@@ -73,7 +73,7 @@ namespace MakeItRain.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.IdentityUsers, "Id", "UserName", stockTransaction.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "UserName", stockTransaction.UserID);
             return View(stockTransaction);
         }
 
@@ -90,7 +90,7 @@ namespace MakeItRain.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.IdentityUsers, "Id", "UserName", stockTransaction.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "UserName", stockTransaction.UserID);
             return View(stockTransaction);
         }
 

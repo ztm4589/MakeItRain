@@ -85,7 +85,7 @@ namespace MakeItRain.Controllers
 
             protected override void OnInit(InitArgs e)
             {
-                //base.OnInit(e);
+                base.OnInit(e);
                 DataTable dt = new DataTable();
                 var tmp = db.Users.Find(userID).CalendarEvents; // db.Users.Find(userID).CalendarEvents.AsEnumerable();
                 List<CalendarEvent> list = tmp.ToList();
@@ -94,6 +94,8 @@ namespace MakeItRain.Controllers
                 dt.Columns.Add("start", typeof(DateTime));
                 dt.Columns.Add("end", typeof(DateTime));
                 dt.Columns.Add("text", typeof(string));
+
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["id"] };
 
                 foreach(CalendarEvent ev in list)
                 {

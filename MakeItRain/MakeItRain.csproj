@@ -201,6 +201,10 @@
     <Compile Include="Migrations\201405042303434_FixTypo.Designer.cs">
       <DependentUpon>201405042303434_FixTypo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405052356407_Users.cs" />
+    <Compile Include="Migrations\201405052356407_Users.Designer.cs">
+      <DependentUpon>201405052356407_Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations_Old\201403020212236_AddInitinalTables.cs" />
     <Compile Include="Migrations_Old\201403020212236_AddInitinalTables.Designer.cs">
@@ -293,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405042303434_FixTypo.resx">
       <DependentUpon>201405042303434_FixTypo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405052356407_Users.resx">
+      <DependentUpon>201405052356407_Users.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations_Old\201403020212236_AddInitinalTables.resx">
       <DependentUpon>201403020212236_AddInitinalTables.cs</DependentUpon>
