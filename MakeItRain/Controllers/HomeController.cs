@@ -41,10 +41,14 @@ namespace MakeItRain.Controllers
              foreach (dynamic friend in result.data  )
             {
                 htmlFriends += "<li>";
-                htmlFriends += "<div class='pic'>";
+                htmlFriends += "<div class='panel panel-primary'>";
+                htmlFriends += "<div class='panel-heading'>";
+                htmlFriends += "<h3 class='panel-title'>" +friend.name + "</h3>";
+                htmlFriends += "</div>";
+                htmlFriends += "<div class='panel-body'>";
                 htmlFriends += "<img src='https://graph.facebook.com/" + friend.id + "/picture'/>";
                 htmlFriends += "</div>";
-                htmlFriends += "<div class='picName'>"+friend.name+"</div>";
+                htmlFriends += "</div>";
                 htmlFriends += "</li>";
                 count++;
                 if (count >= 10)
@@ -57,17 +61,17 @@ namespace MakeItRain.Controllers
 
             
             result = client.Get("/me/home");
-            string htmlFeed = "<ul>";
+            string htmlFeed = "<h3>Facebook News Feed</h3> <br /> <ul>";
             foreach(dynamic feed in result.data)
             {
                 htmlFeed += "<li>";
                 if (feed.message!=null && feed.message!="")
                 {
-                    htmlFeed += "<div class='statusMessage' id='" + feed.id + "'>" + feed.message + "</div>";
+                    htmlFeed += "<div class='panel panel-default'> <div class='panel-body' id='" + feed.id + "'>" + feed.message + "</div> </div>";
                 }
                 else
                 {
-                    htmlFeed += "<div class='statusMessage' id='" + feed.id + "'>" + feed.story + "</div>";
+                    htmlFeed += "<div class='panel panel-default'> <div class='panel-body' id='" + feed.id + "'>" + feed.story + "</div> </div>";
                 }
                 
                 htmlFeed += "</li>";
